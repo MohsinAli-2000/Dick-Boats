@@ -1,0 +1,2316 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Asap:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ============================================================================
+   DICK'S BOAT SHOP — GLOBAL DESIGN SYSTEM (Phase 1)
+   Single source of truth. Reusable, system-based, DRY.
+   Tech: HTML5 + CSS3 + Bootstrap 4.6 (grid/utilities only).
+
+   TABLE OF CONTENTS
+   1.  Design Tokens (CSS variables)
+   2.  Reset & Base
+   3.  Typography System
+   4.  Layout System (custom wrappers, sections, dividers)
+   5.  Button System
+   6.  Form System (inputs, labels)
+   7.  Components
+       7.1  Navbar
+       7.2  Footer + Newsletter
+       7.3  Hero
+       7.4  Section heading
+       7.5  Feature row (image + text)
+       7.6  Cards (inventory / content)
+       7.7  CTA banner
+       7.8  Breadcrumb
+       7.9  Accordion (FAQ)
+       7.10 Location card
+   8.  Utility Classes (colors, spacing, shadows, radius, alignment)
+   ========================================================================== */
+
+
+/* ============================================================================
+   1. DESIGN TOKENS
+   ========================================================================== */
+:root {
+    /* ---- Brand Colors ---- */
+    --blue: #003469;
+    /* primary brand navy */
+    --slateBlue: #537F94;
+    /* secondary / accent */
+    --blackish: #191919;
+    /* body text */
+    --white: #FFFFFF;
+    --lightestGray: #FAFAFA;
+    /* section tint */
+    --lightGrayD9: #D9D9D9;
+    /* borders, placeholders */
+    --lightGrayE6: #E6E6E6;
+    /* input borders */
+
+    /* ---- Semantic ---- */
+    --textPrimary: #191919;
+    --textHeading: #003469;
+    --textMuted: rgba(0, 52, 105, 0.6);
+    --textOnDark: #FFFFFF;
+    --bgBody: #FFFFFF;
+    --bgAlt: #FAFAFA;
+    --borderColor: #D9D9D9;
+    --inputBorder: #E6E6E6;
+
+    /* ---- Typography ---- */
+    --fontHeading: 'Rajdhani', sans-serif;
+    --fontBody: 'Asap', sans-serif;
+
+    --h1Size: 80px;
+    --h1Lh: 80px;
+    --h2Size: 48px;
+    --h2Lh: 48px;
+    --h3Size: 24px;
+    --h3Lh: 28px;
+    --h6Size: 20px;
+    --h6Lh: 24px;
+    --bodySize: 16px;
+    --bodyLh: 24px;
+    --smallSize: 14px;
+    --trackingHeading: 8px;
+    /* big display headings */
+    --trackingButton: 1.6px;
+    /* button text (20px * ~8%) */
+
+    /* ---- Spacing scale ---- */
+    --space1: 4px;
+    --space2: 8px;
+    --space3: 16px;
+    --space4: 24px;
+    --space5: 32px;
+    --space6: 48px;
+    --space7: 64px;
+    --space8: 96px;
+    --space9: 120px;
+    --sectionGap: 120px;
+    /* vertical rhythm between major sections */
+
+    /* ---- Radius ---- */
+    --radiusSm: 4px;
+    --radiusMd: 8px;
+    --radiusLg: 16px;
+    --radiusPill: 24px;
+    --radiusCircle: 50%;
+
+    /* ---- Shadows ---- */
+    --shadowSm: 0 1px 4px rgba(0, 52, 105, 0.06);
+    --shadowMd: 0 4px 16px rgba(0, 52, 105, 0.08);
+    --shadowLg: 0 12px 32px rgba(0, 52, 105, 0.12);
+
+    /* ---- Sizing ---- */
+    --navHeight: 100px;
+    --transition: 0.25s ease;
+}
+
+
+/* ============================================================================
+   2. RESET & BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+ol,
+ul,
+dl,
+fieldset,
+pre {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+/* Normalize bare heading tags to inherit the body font/size. Visual styling
+   is applied via the semantic heading classes, NOT the tags themselves, so an
+   unclassed heading stays neutral instead of falling back to browser defaults. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    line-height: inherit;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    font-weight: 400;
+    color: var(--textPrimary);
+    background-color: var(--bgBody);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: color var(--transition), opacity var(--transition);
+}
+
+a:hover {
+    color: var(--slateBlue);
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: 2px solid var(--slateBlue);
+    outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   3. TYPOGRAPHY SYSTEM
+   Headings use Rajdhani Bold, uppercase display style with wide tracking.
+   Body uses Asap.
+
+   IMPORTANT: heading tags (h1–h6) are NOT styled directly — pick the semantic
+   heading CLASS that matches the design intent and apply it to any tag. This
+   keeps markup semantics (h1/h2 for SEO/a11y) independent of visual size, and
+   avoids surprise inheritance when a heading needs a different look.
+
+   Size scale (matches the Figma type tokens):
+     .largeHeading      — H1 / 80px  (hero, page titles)
+     .primaryHeading    — H2 / 48px  (section titles)
+     .secondaryHeading  — H3 / 24px  (sub-section / tile titles)
+     .tertiaryHeading   — 22px
+     .subHeading        — 20px
+     .minorHeading      — H6 / 20px  (footer columns, accordion, nav-like)
+   Color variants: default = navy. Append the matching *WhiteHeading class
+   (or .whiteText) when the heading sits on a dark/image background.
+   ========================================================================== */
+
+/* Shared heading base — apply alongside a size class, or use a size class
+   directly (each size class already pulls in these base properties). */
+.heading,
+.largeHeading,
+.primaryHeading,
+.secondaryHeading,
+.tertiaryHeading,
+.subHeading,
+.minorHeading,
+.largeWhiteHeading,
+.primaryWhiteHeading,
+.secondaryWhiteHeading {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    color: var(--textHeading);
+    text-transform: uppercase;
+}
+
+/* ---- Size variants ---- */
+.largeHeading,
+.largeWhiteHeading {
+    font-size: var(--h1Size);
+    line-height: var(--h1Lh);
+    letter-spacing: var(--trackingHeading);
+}
+
+.primaryHeading,
+.primaryWhiteHeading {
+    font-size: var(--h2Size);
+    line-height: var(--h2Lh);
+    letter-spacing: var(--trackingHeading);
+}
+
+.secondaryHeading,
+.secondaryWhiteHeading {
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: var(--trackingHeading);
+}
+
+.tertiaryHeading {
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 4px;
+}
+
+.subHeading {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 2px;
+}
+
+.minorHeading {
+    font-size: var(--h6Size);
+    line-height: var(--h6Lh);
+    letter-spacing: 0;
+}
+
+/* ---- Colour variants (for dark / image backgrounds) ---- */
+.largeWhiteHeading,
+.primaryWhiteHeading,
+.secondaryWhiteHeading {
+    color: var(--white);
+}
+
+/* Card / inventory titles: Rajdhani but tighter, not display-spaced */
+.cardTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--textHeading);
+}
+
+/* Eyebrow / kicker above a heading */
+.eyebrow {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--slateBlue);
+}
+
+p,
+.paragraph {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    font-weight: 400;
+    color: var(--textPrimary);
+}
+
+.lead {
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.small,
+small {
+    font-size: var(--smallSize);
+    line-height: 20px;
+}
+
+.label {
+    font-family: var(--fontBody);
+    font-size: var(--smallSize);
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--textHeading);
+}
+
+blockquote,
+.blockquote {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+
+/* ============================================================================
+   4. LAYOUT SYSTEM
+   Per project rule: NO Bootstrap .container. Use container-fluid + row +
+   centered col + mx-auto. These helpers complement that grid usage.
+   ========================================================================== */
+
+/* Page wrapper to push footer down */
+.siteWrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.siteWrapper>main {
+    flex: 1 0 auto;
+}
+
+/* Vertical section rhythm */
+.section {
+    padding-top: var(--sectionGap);
+    padding-bottom: var(--sectionGap);
+}
+
+.sectionSm {
+    padding-top: var(--space7);
+    padding-bottom: var(--space7);
+}
+
+.sectionTint {
+    background-color: var(--bgAlt);
+}
+
+.sectionDark {
+    background-color: var(--blue);
+    color: var(--textOnDark);
+}
+
+/* Full-bleed band (e.g. quote band, dark CTA) inside a fluid layout */
+.bandDark {
+    background-color: var(--blue);
+    color: var(--textOnDark);
+}
+
+.bandSlate {
+    background-color: var(--slateBlue);
+    color: var(--textOnDark);
+}
+
+/* Hairline divider */
+.divider {
+    border: 0;
+    border-top: 1px solid var(--borderColor);
+    margin: 0;
+}
+
+
+/* ============================================================================
+   5. BUTTON SYSTEM
+   Base: pill, Rajdhani Bold uppercase, wide tracking, 48px tall.
+   Variants: primary (navy), secondary (slate), outline, ghost, link.
+   ========================================================================== */
+.btnBase {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space2);
+    min-height: 48px;
+    padding: 13px 24px;
+    border: 2px solid transparent;
+    border-radius: var(--radiusPill);
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h6Size);
+    line-height: 1;
+    letter-spacing: var(--trackingButton);
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color var(--transition), color var(--transition),
+        border-color var(--transition), transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.btnBase:active {
+    transform: translateY(1px);
+}
+
+/* Primary — solid navy */
+.blueBtn {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.blueBtn:hover {
+    background-color: #00254c;
+    border-color: #00254c;
+    color: var(--white);
+    box-shadow: var(--shadowMd);
+}
+
+/* Secondary — slate blue */
+.slateBtn {
+    background-color: var(--slateBlue);
+    color: var(--white);
+    border-color: var(--slateBlue);
+}
+
+.slateBtn:hover {
+    background-color: #46697b;
+    border-color: #46697b;
+    color: var(--white);
+    box-shadow: var(--shadowMd);
+}
+
+/* Outline — navy border on transparent */
+.outlineBtn {
+    background-color: transparent;
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.outlineBtn:hover {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+/* Outline on dark backgrounds */
+.outlineBtnLight {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.outlineBtnLight:hover {
+    background-color: var(--white);
+    color: var(--blue);
+}
+
+/* White — solid white with dark text (used on image tiles) */
+.whiteBtn {
+    background-color: var(--white);
+    color: var(--blackish);
+    border-color: var(--white);
+}
+
+.whiteBtn:hover {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+    box-shadow: var(--shadowMd);
+}
+
+/* Ghost — text-only, subtle hover fill */
+.ghostBtn {
+    background-color: transparent;
+    color: var(--blue);
+    border-color: transparent;
+}
+
+.ghostBtn:hover {
+    background-color: rgba(0, 52, 105, 0.06);
+    color: var(--blue);
+}
+
+/* Link button — inline arrow link ("View Details") */
+.linkBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space2);
+    font-family: var(--fontBody);
+    font-weight: 600;
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--blue);
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.linkBtn::after {
+    content: "\2192";
+    /* → */
+    transition: transform var(--transition);
+}
+
+.linkBtn:hover {
+    color: var(--slateBlue);
+}
+
+.linkBtn:hover::after {
+    transform: translateX(4px);
+}
+
+/* Size modifiers */
+.btnSm {
+    min-height: 40px;
+    padding: 10px 18px;
+    font-size: 16px;
+}
+
+.btnLg {
+    min-height: 56px;
+    padding: 16px 32px;
+}
+
+.btnBlock {
+    display: flex;
+    width: 100%;
+}
+
+
+/* ============================================================================
+   6. FORM SYSTEM
+   ========================================================================== */
+.formGroup {
+    margin-bottom: var(--space4);
+}
+
+.formLabel {
+    display: block;
+    margin-bottom: var(--space2);
+    font-family: var(--fontBody);
+    font-size: var(--smallSize);
+    font-weight: 600;
+    color: var(--textHeading);
+}
+
+.input,
+.textarea,
+.select {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--textPrimary);
+    background-color: var(--white);
+    border: 1px solid var(--inputBorder);
+    border-radius: var(--radiusSm);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    outline: none;
+    border-color: var(--slateBlue);
+    box-shadow: 0 0 0 3px rgba(83, 127, 148, 0.15);
+}
+
+/* Inline input with submit (newsletter) */
+.inputInline {
+    display: flex;
+    align-items: stretch;
+    background-color: var(--white);
+    border: 1px solid var(--inputBorder);
+    border-radius: var(--radiusSm);
+    overflow: hidden;
+}
+
+.inputInline .input {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.inputInline .input:focus {
+    box-shadow: none;
+}
+
+.inputInline .inputSubmit {
+    flex: 0 0 auto;
+    width: 56px;
+    border: 0;
+    background-color: transparent;
+    color: var(--blue);
+    font-size: 20px;
+    line-height: 1;
+}
+
+.inputInline .inputSubmit:hover {
+    color: var(--slateBlue);
+}
+
+
+/* ============================================================================
+   7. COMPONENTS
+   ========================================================================== */
+
+/* ---- 7.1 Navbar -------------------------------------------------------- */
+.siteNav {
+    height: var(--navHeight);
+    background-color: var(--white);
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.siteNav .navInner {
+    display: flex;
+    align-items: center;
+    height: var(--navHeight);
+}
+
+.navLogo {
+    flex: 0 0 auto;
+}
+
+.navLogo img {
+    height: 96px;
+    width: auto;
+}
+
+.navMenu {
+    display: flex;
+    align-items: center;
+    gap: var(--space6);
+    margin: 0 auto;
+}
+
+.navLink {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h6Size);
+    line-height: var(--h6Lh);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--blue);
+}
+
+.navLink:hover,
+.navLink.isActive {
+    color: var(--slateBlue);
+}
+
+.navContact {
+    flex: 0 0 auto;
+    text-align: right;
+    line-height: 1.2;
+}
+
+.navContact .navContactLabel {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    color: var(--slateBlue);
+}
+
+.navContact .navContactPhone {
+    font-family: var(--fontHeading);
+    font-weight: 600;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    color: var(--blue);
+}
+
+/* Mobile toggle */
+.navToggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font-size: 24px;
+}
+
+
+/* ---- 7.2 Footer + Newsletter ------------------------------------------ */
+.siteFooter {
+    background-color: var(--white);
+    border-top: 1px solid var(--borderColor);
+}
+
+.footerMain {
+    padding-top: var(--space8);
+    padding-bottom: var(--space8);
+}
+
+.footerColTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h6Size);
+    line-height: var(--h6Lh);
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: var(--space4);
+}
+
+.footerList li {
+    margin-bottom: var(--space2);
+}
+
+.footerLink {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--blackish);
+}
+
+.footerLink:hover {
+    color: var(--slateBlue);
+}
+
+.footerLogo img {
+    max-width: 200px;
+    margin-bottom: var(--space4);
+}
+
+.footerAddress {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--blackish);
+    margin-bottom: var(--space3);
+}
+
+.footerPhone {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: 1.92px;
+    color: var(--blue);
+    text-transform: uppercase;
+}
+
+/* Newsletter — dark navy panel */
+.newsletter {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: var(--space8) var(--space7);
+    height: 100%;
+}
+
+.newsletterTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    font-size: var(--h2Size);
+    line-height: var(--h2Lh);
+    letter-spacing: var(--trackingHeading);
+    margin-bottom: var(--space4);
+}
+
+.newsletterText {
+    color: var(--white);
+    margin-bottom: var(--space4);
+}
+
+.footerBottom {
+    border-top: 1px solid var(--borderColor);
+    padding: var(--space4) 0;
+}
+
+.footerCopy {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    color: var(--blue);
+    opacity: 0.6;
+    text-align: center;
+}
+
+.socialList {
+    display: flex;
+    gap: var(--space3);
+}
+
+.socialList a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radiusCircle);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.socialList a:hover {
+    background-color: var(--white);
+    color: var(--blue);
+}
+
+
+/* ---- 7.3 Hero ---------------------------------------------------------- */
+.hero {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    background-color: var(--blue);
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 52, 105, 0.55), rgba(0, 52, 105, 0.35));
+}
+
+/* Dark flat overlay variant (e.g. text over a neutral/placeholder background) */
+.hero--dark {
+    background-color: var(--lightGrayD9);
+}
+
+.hero--dark::before {
+    background: rgba(25, 25, 25, 0.6);
+}
+
+.heroInner {
+    position: relative;
+    z-index: 1;
+}
+
+.heroTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h1Size);
+    line-height: var(--h1Lh);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space4);
+}
+
+.heroText {
+    color: var(--white);
+    max-width: 640px;
+    margin-bottom: var(--space5);
+}
+
+/* Centered quote band (e.g. founder quote over photo) */
+.quoteBand {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--blue);
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+}
+
+.quoteBand::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 52, 105, 0.55);
+}
+
+.quoteBandInner {
+    position: relative;
+    z-index: 1;
+}
+
+.quoteText {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: clamp(20px, 4vw, 40px);
+    line-height: 1.25;
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space4);
+}
+
+.quoteAuthor {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h3Size);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+
+/* ---- 7.4 Section heading ---------------------------------------------- */
+.sectionHeading {
+    text-align: center;
+    margin-bottom: var(--space7);
+}
+
+.sectionHeading .eyebrow {
+    display: block;
+    margin-bottom: var(--space2);
+}
+
+.sectionHeading .primaryHeading {
+    position: relative;
+    display: inline-block;
+}
+
+/* underline accent under centered headings */
+.sectionHeading.hasAccent .primaryHeading::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 4px;
+    margin: var(--space3) auto 0;
+    background-color: var(--slateBlue);
+    border-radius: var(--radiusPill);
+}
+
+.sectionHeading--left {
+    text-align: left;
+}
+
+.sectionHeading--left .primaryHeading::after {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+
+/* ---- 7.5 Feature row (image + text, alternating) ---------------------- */
+.featureRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space8);
+}
+
+.featureRow--reverse {
+    flex-direction: row-reverse;
+}
+
+.featureMedia {
+    flex: 1 1 50%;
+}
+
+.featureMedia img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.featureBody {
+    flex: 1 1 50%;
+}
+
+.featureBody .secondaryHeading,
+.featureBody .primaryHeading {
+    margin-bottom: var(--space3);
+}
+
+.featureBody p {
+    margin-bottom: var(--space4);
+}
+
+
+/* ---- 7.6 Cards -------------------------------------------------------- */
+/* Generic content card */
+.featureCard {
+    background-color: var(--white);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusLg);
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.featureCard:hover {
+    box-shadow: var(--shadowLg);
+    transform: translateY(-4px);
+}
+
+.featureCard .cardMedia img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.featureCard .cardBody {
+    padding: var(--space4);
+}
+
+.featureCard .cardBody p {
+    margin-top: var(--space2);
+}
+
+/* Inventory card — square image + borderless body (matches Figma exactly:
+   no outer border, no radius, no shadow; only a hairline above the meta row). */
+.inventoryCard {
+    background-color: var(--white);
+}
+
+.inventoryCard .cardMedia {
+    aspect-ratio: 417 / 292;
+    background-color: var(--lightGrayD9);
+}
+
+.inventoryCard .cardMedia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.inventoryCard .cardBody {
+    padding: 21px 0;
+}
+
+.inventoryCard .cardTitle {
+    margin-bottom: var(--space2);
+}
+
+.inventoryCard .cardTitle a {
+    color: var(--textHeading);
+}
+
+.inventoryCard .linkBtn {
+    margin-bottom: var(--space3);
+}
+
+/* Spec meta list (condition · length · hours) — divider line sits above it */
+.metaList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space3);
+    padding-top: var(--space3);
+    border-top: 1px solid var(--borderColor);
+}
+
+.metaItem {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space1);
+    font-family: var(--fontBody);
+    font-size: var(--smallSize);
+    line-height: 20px;
+    color: var(--textPrimary);
+}
+
+.metaItem+.metaItem {
+    padding-left: var(--space3);
+    border-left: 1px solid var(--borderColor);
+}
+
+.metaItem img,
+.metaItem .metaIcon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+}
+
+
+/* ---- 7.7 CTA banner ---------------------------------------------------- */
+.ctaBanner {
+    background-color: var(--slateBlue);
+    color: var(--white);
+    border-radius: var(--radiusLg);
+    padding: var(--space7);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space5);
+}
+
+.ctaBanner .ctaTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space2);
+}
+
+.ctaBanner .ctaText {
+    color: var(--white);
+    margin: 0;
+}
+
+.ctaBanner--navy {
+    background-color: var(--blue);
+}
+
+@media (max-width: 767.98px) {
+    .ctaBanner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+/* ---- 7.8 Breadcrumb ---------------------------------------------------- */
+.breadcrumbNav {
+    font-family: var(--fontBody);
+    font-size: var(--smallSize);
+    color: var(--textMuted);
+    padding: var(--space4) 0;
+}
+
+.breadcrumbNav a {
+    color: var(--textMuted);
+}
+
+.breadcrumbNav a:hover {
+    color: var(--blue);
+}
+
+.breadcrumbNav .sep {
+    margin: 0 var(--space1);
+}
+
+.breadcrumbNav .current {
+    color: var(--blue);
+}
+
+
+/* ---- 7.9 Accordion (FAQ) ---------------------------------------------- */
+.accordionCustom .accItem {
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.accordionCustom .accHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space3);
+    padding: var(--space4) 0;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h6Size);
+    line-height: var(--h6Lh);
+    color: var(--blue);
+    text-transform: uppercase;
+}
+
+.accordionCustom .accIcon {
+    flex: 0 0 auto;
+    transition: transform var(--transition);
+}
+
+.accordionCustom .accHeader[aria-expanded="true"] .accIcon {
+    transform: rotate(180deg);
+}
+
+.accordionCustom .accBody {
+    padding-bottom: var(--space4);
+    color: var(--textPrimary);
+}
+
+
+/* ---- 7.10 Location card ------------------------------------------------ */
+.locationCard {
+    background-color: var(--white);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusLg);
+    overflow: hidden;
+    text-align: center;
+}
+
+.locationCard .cardMedia {
+    aspect-ratio: 480 / 300;
+    background-color: var(--lightGrayD9);
+}
+
+.locationCard .cardMedia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.locationCard .cardBody {
+    padding: var(--space4);
+}
+
+.locationCard .locationName {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h3Size);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: var(--space2);
+}
+
+.locationCard .locationMeta {
+    font-size: var(--smallSize);
+    color: var(--textPrimary);
+}
+
+
+/* ---- 7.11 Media tile (image with dark gradient + overlaid content) ----- */
+/* Reusable: promo tiles, category tiles. Square corners (matches Figma).
+   Overlay = navy gradient, multiply blend, 80% opacity, bottom half only. */
+.mediaTile {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    background-color: var(--lightGrayD9);
+}
+
+.mediaTile img,
+.mediaTile video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mediaTile::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 65%;   /* category tiles: 440 of 680px */
+    background: linear-gradient(180deg, rgba(0, 52, 105, 0) 0%, #003469 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+}
+
+.mediaTile.tileTall::after {
+    height: 50%;   /* promo tiles: 440 of 880px */
+}
+
+.mediaTile .tileBody {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    width: 100%;
+    padding: var(--space5);
+    color: var(--white);
+}
+
+.mediaTile .tileTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space3);
+}
+
+.mediaTile .tileText {
+    color: var(--white);
+    margin-bottom: var(--space4);
+}
+
+/* Aspect helpers for tiles (exact Figma dimensions) */
+.tileTall { aspect-ratio: 720 / 880; }   /* promo tiles: New / Pre-Owned */
+.tileWide { aspect-ratio: 635 / 680; }   /* category grid tiles */
+
+
+/* ---- 7.12 Brand strip (partner logos row) ----------------------------- */
+.brandStrip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space6);
+}
+
+.brandStrip .brandLogo {
+    flex: 0 0 auto;
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.75;
+    transition: filter var(--transition), opacity var(--transition);
+}
+
+.brandStrip .brandLogo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+/* Dense variant — more logos in one evenly-spaced row (caps each logo). */
+.brandStrip--dense {
+    gap: var(--space4);
+}
+
+.brandStrip--dense .brandLogo {
+    height: auto;
+    max-height: 44px;
+    max-width: 140px;
+}
+
+
+/* ---- 7.13 Quick links (icon + title + subtitle, divided row) ---------- */
+.quickLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space7);
+}
+
+.quickLink {
+    display: flex;
+    align-items: center;
+    gap: var(--space3);
+}
+
+.quickLink + .quickLink {
+    padding-left: var(--space7);
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.quickLinks--dark .quickLink + .quickLink {
+    border-left-color: rgba(255, 255, 255, 0.25);
+}
+
+.quickLinks--light .quickLink + .quickLink {
+    border-left-color: var(--borderColor);
+}
+
+.quickLink .quickIcon {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radiusCircle);
+    background-color: var(--blue);
+}
+
+.quickLink .quickIcon img {
+    width: 26px;
+    height: 26px;
+}
+
+.quickLink .quickTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h6Size);
+    line-height: var(--h6Lh);
+    text-transform: uppercase;
+    color: var(--blue);
+}
+
+.quickLink .quickSub {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    color: var(--textPrimary);
+}
+
+.quickLinks--dark .quickTitle,
+.quickLinks--dark .quickSub { color: var(--white); }
+
+
+/* ---- 7.14 Hero variants: video bg + centered content ------------------ */
+.heroVideo video,
+.heroVideo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero--center {
+    text-align: center;
+    justify-content: center;
+}
+
+.heroEyebrow {
+    display: block;
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    color: var(--white);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: var(--space3);
+}
+
+.heroActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space3);
+    justify-content: center;
+}
+
+
+/* ---- 7.15 Promo banner (full-width image band, centered content) ------ */
+.promoBanner {
+    position: relative;
+    min-height: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--blue);
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    overflow: hidden;
+}
+
+.promoBanner video,
+.promoBanner > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.promoBanner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 52, 105, 0.6);
+    z-index: 1;
+}
+
+.promoBanner .promoInner {
+    position: relative;
+    z-index: 2;
+}
+
+.promoBanner .promoTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h1Size);
+    line-height: var(--h1Lh);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space3);
+}
+
+.promoBanner .promoText {
+    color: var(--white);
+    margin-bottom: var(--space5);
+}
+
+
+/* ---- 7.16 Section title row (left heading + right action) ------------- */
+.sectionTitleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space4);
+    margin-bottom: var(--space6);
+}
+
+@media (max-width: 575.98px) {
+    .sectionTitleRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* ---- 7.17 Brand hero (plain full-bleed image band) -------------------- */
+.brandHero {
+    height: 680px;
+    background-color: var(--blue);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.brandHero img,
+.brandHero video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ---- 7.18 Lineup watermark heading (big faded display title) ---------- */
+/* Rajdhani Bold 120px, slate, 20% opacity, centered — section separator. */
+.lineupWatermark {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    /* 120px at the 1920 comp; scales down with the viewport so the single
+       line never clips between breakpoints. */
+    font-size: clamp(48px, 6.25vw, 120px);
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--slateBlue);
+    opacity: 0.2;
+    white-space: nowrap;
+}
+
+
+/* ---- 7.19 Brand feature row (full-bleed image + inset text, alternating) */
+/* Image fills its half edge-to-edge (square); text sits in the other half. */
+.brandFeature {
+    display: flex;
+    align-items: center;
+}
+
+.brandFeature .brandFeatureMedia,
+.brandFeature .brandFeatureBody {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.brandFeature .brandFeatureMedia {
+    align-self: stretch;
+    background-color: var(--lightGrayD9);
+}
+
+.brandFeature .brandFeatureMedia img {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+}
+
+/* Text inset: matches Figma ~130px gutter from page edge, content max 700px */
+.brandFeature .brandFeatureBody {
+    padding: var(--space6) 130px;
+}
+
+.brandFeature .brandFeatureBody .innerLimit {
+    max-width: 700px;
+}
+
+/* reverse = image on the right, text on the left */
+.brandFeature--reverse {
+    flex-direction: row-reverse;
+}
+
+.brandFeature .brandFeatureEyebrow {
+    display: block;
+    margin-bottom: var(--space3);
+}
+
+.brandFeature .brandFeatureBody p {
+    margin-bottom: var(--space4);
+}
+
+
+/* ---- 7.20 Service band (slate panel + image, two columns) ------------- */
+.serviceBand {
+    display: flex;
+    align-items: stretch;
+}
+
+.serviceBand .servicePanel,
+.serviceBand .serviceMedia {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.serviceBand .servicePanel {
+    background-color: var(--slateBlue);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space7) 140px;
+}
+
+.serviceBand .servicePanel .serviceTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h2Size);
+    line-height: var(--h2Lh);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space4);
+}
+
+.serviceBand .servicePanel p {
+    color: var(--white);
+    margin-bottom: var(--space5);
+}
+
+.serviceBand .serviceMedia {
+    background-color: var(--lightGrayD9);
+}
+
+.serviceBand .serviceMedia img {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+}
+
+
+/* ---- 7.21 Media placeholder (gray block where a photo will go) -------- */
+/* Mirrors the #c4c4c4 placeholder rectangles in the comp. Drop an <img>
+   inside (or swap the element for an <img>) when the real photo is ready. */
+.mediaPlaceholder {
+    width: 100%;
+    background-color: var(--lightGrayD9);
+}
+
+.mediaPlaceholder--tall {
+    aspect-ratio: 720 / 880;
+}
+
+.mediaPlaceholder--wide {
+    aspect-ratio: 400 / 240;
+}
+
+.mediaPlaceholder--square {
+    aspect-ratio: 1 / 1;
+}
+
+/* Map placeholder (where an embedded map will go) */
+.mapPlaceholder {
+    aspect-ratio: 960 / 520;
+    width: 100%;
+    background-color: var(--lightGrayD9);
+}
+
+
+/* ---- 7.22 Timeline card (image block + title + copy) ------------------ */
+.timelineCard {
+    height: 100%;
+}
+
+
+/* ---- 7.23 Note box (centered italic note on a light panel) ------------ */
+/* Asap italic 16/24, blackish, centered on a #fafafa panel. The leading
+   "Note:" label is bold-italic (wrap it in <strong>). */
+.noteBox {
+    background-color: var(--lightestGray);
+    padding: var(--space5) var(--space7);
+    font-family: var(--fontBody);
+    font-style: italic;
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--blackish);
+    text-align: center;
+}
+
+.noteBox strong {
+    font-weight: 700;
+    font-style: italic;
+}
+
+
+/* ---- 7.24 Icon badge (slate circle holding a white icon) -------------- */
+.iconBadge {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radiusCircle);
+    background-color: var(--slateBlue);
+    color: var(--white);
+}
+
+.iconBadge img {
+    width: 24px;
+    height: 24px;
+}
+
+.iconBadge .fa-solid,
+.iconBadge i {
+    font-size: 20px;
+    color: var(--white);
+}
+
+/* Numbered variant with the soft drop shadow from the comp */
+.iconBadge--number {
+    font-family: var(--fontHeading);
+    font-weight: 600;
+    font-size: var(--h3Size);
+    line-height: 1;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ---- 7.25 Benefit item (icon + title + copy, horizontal) -------------- */
+.benefitItem {
+    display: flex;
+    gap: var(--space4);
+}
+
+.benefitItem .benefitBody .benefitTitle {
+    font-family: var(--fontHeading);
+    font-weight: 600;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--textHeading);
+    margin-bottom: var(--space2);
+}
+
+/* On a slate/coloured band: body copy turns white (navy titles still pop). */
+.benefitItem--onSlate .benefitBody p {
+    color: var(--white);
+}
+
+.benefitItem--onSlate .benefitBody .secondaryHeading {
+    margin-bottom: var(--space2);
+}
+
+/* Plain icon holder (no badge background) — e.g. navy line icons. */
+.iconWrap {
+    flex: 0 0 48px;
+    width: 48px;
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.iconWrap img {
+    width: 40px;
+    height: auto;
+}
+
+
+/* ---- 7.26 Process band (image/navy band holding numbered cards) ------- */
+.processBand {
+    position: relative;
+    background-color: var(--blue);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.processBand > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.processBand::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 52, 105, 0.85);
+    z-index: 1;
+}
+
+.processBand .processInner {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ---- 7.27 Process card (white card + numbered badge) ------------------ */
+.processCard {
+    height: 100%;
+    background-color: var(--white);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusMd);
+    padding: var(--space4);
+}
+
+.processCard .processNumber {
+    margin-bottom: var(--space4);
+}
+
+.processCard .processTitle {
+    font-family: var(--fontHeading);
+    font-weight: 600;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--textHeading);
+    margin-bottom: var(--space2);
+}
+
+
+/* ---- 7.28 Contact line (icon + text rows, e.g. on a form aside) ------- */
+.contactLine {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space3);
+    margin-bottom: var(--space3);
+}
+
+.contactLine .contactIcon {
+    flex: 0 0 20px;
+    width: 20px;
+    margin-top: 2px;
+    color: var(--slateBlue);
+    text-align: center;
+}
+
+
+/* ---- 7.29 Store card (square image + title + slate subtitle + copy) --- */
+/* Borderless, square corners (matches the comp). Title uses .secondaryHeading. */
+.storeCard {
+    height: 100%;
+}
+
+.storeCard .storeMedia {
+    aspect-ratio: 480 / 288;
+    background-color: var(--lightGrayD9);
+    margin-bottom: var(--space4);
+}
+
+.storeCard .storeMedia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.storeCard .secondaryHeading {
+    margin-bottom: var(--space1);
+}
+
+/* SemiBold slate sub-line under the card title (h5 token, no tracking) */
+.storeSubtitle {
+    font-family: var(--fontHeading);
+    font-weight: 600;
+    font-size: var(--h3Size);
+    line-height: var(--h3Lh);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--slateBlue);
+    margin-bottom: var(--space2);
+}
+
+
+/* ---- 7.30 Hero with overlapping intro card --------------------------- */
+/* Hero image band; an intro card is pulled up to overlap its lower edge. */
+.heroOverlap {
+    position: relative;
+    height: 720px;
+    background-color: var(--blue);
+    background-size: cover;
+    background-position: center;
+}
+
+.heroOverlap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heroOverlapCard {
+    position: relative;
+    margin-top: -158px;     /* pulls the card up over the hero (matches comp) */
+    z-index: 2;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--inputBorder);
+    padding: var(--space7) var(--space7) var(--space6);
+}
+
+
+/* ---- 7.31 Award card (image + icon + title + copy) ------------------- */
+.awardCard {
+    height: 100%;
+    background-color: var(--white);
+}
+
+.awardCard .awardMedia {
+    aspect-ratio: 340 / 260;
+    background-color: var(--lightGrayD9);
+    margin-bottom: var(--space4);
+}
+
+.awardCard .awardMedia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.awardCard .awardIcon {
+    display: block;
+    height: 48px;
+    margin-bottom: var(--space3);
+}
+
+.awardCard .awardIcon img {
+    height: 48px;
+    width: auto;
+}
+
+.awardCard .minorHeading {
+    margin-bottom: var(--space2);
+}
+
+
+/* ============================================================================
+   8. UTILITY CLASSES
+   ========================================================================== */
+
+/* ---- Text colors ---- */
+.blueText {
+    color: var(--blue) !important;
+}
+
+.slateText {
+    color: var(--slateBlue) !important;
+}
+
+.blackishText {
+    color: var(--blackish) !important;
+}
+
+.whiteText {
+    color: var(--white) !important;
+}
+
+.mutedText {
+    color: var(--textMuted) !important;
+}
+
+/* ---- Background colors ---- */
+.blueBg {
+    background-color: var(--blue) !important;
+}
+
+.slateBg {
+    background-color: var(--slateBlue) !important;
+}
+
+.whiteBg {
+    background-color: var(--white) !important;
+}
+
+.lightestBg {
+    background-color: var(--lightestGray) !important;
+}
+
+.lightBg {
+    background-color: var(--lightGrayD9) !important;
+}
+
+/* ---- Alignment helpers ---- */
+.textCenter {
+    text-align: center !important;
+}
+
+.textLeft {
+    text-align: left !important;
+}
+
+.textRight {
+    text-align: right !important;
+}
+
+.flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ---- Spacing (margin-top / bottom on the system scale) ---- */
+.mt1 {
+    margin-top: var(--space1) !important;
+}
+
+.mt2 {
+    margin-top: var(--space2) !important;
+}
+
+.mt3 {
+    margin-top: var(--space3) !important;
+}
+
+.mt4 {
+    margin-top: var(--space4) !important;
+}
+
+.mt5 {
+    margin-top: var(--space5) !important;
+}
+
+.mt6 {
+    margin-top: var(--space6) !important;
+}
+
+.mt7 {
+    margin-top: var(--space7) !important;
+}
+
+.mt8 {
+    margin-top: var(--space8) !important;
+}
+
+.mb1 {
+    margin-bottom: var(--space1) !important;
+}
+
+.mb2 {
+    margin-bottom: var(--space2) !important;
+}
+
+.mb3 {
+    margin-bottom: var(--space3) !important;
+}
+
+.mb4 {
+    margin-bottom: var(--space4) !important;
+}
+
+.mb5 {
+    margin-bottom: var(--space5) !important;
+}
+
+.mb6 {
+    margin-bottom: var(--space6) !important;
+}
+
+.mb7 {
+    margin-bottom: var(--space7) !important;
+}
+
+.mb8 {
+    margin-bottom: var(--space8) !important;
+}
+
+/* ---- Radius helpers ---- */
+.radiusSm {
+    border-radius: var(--radiusSm) !important;
+}
+
+.radiusMd {
+    border-radius: var(--radiusMd) !important;
+}
+
+.radiusLg {
+    border-radius: var(--radiusLg) !important;
+}
+
+.radiusPill {
+    border-radius: var(--radiusPill) !important;
+}
+
+.radiusCircle {
+    border-radius: var(--radiusCircle) !important;
+}
+
+/* ---- Shadow helpers ---- */
+.shadowSm {
+    box-shadow: var(--shadowSm) !important;
+}
+
+.shadowMd {
+    box-shadow: var(--shadowMd) !important;
+}
+
+.shadowLg {
+    box-shadow: var(--shadowLg) !important;
+}
+
+/* ---- Misc ---- */
+.objectCover {
+    object-fit: cover !important;
+}
+
+.fullWidth {
+    width: 100% !important;
+}
+
+.noWrap {
+    white-space: nowrap !important;
+}
+
+
+/* ============================================================================
+   RESPONSIVE — fluid scaling of the oversized display type from the
+   1920px desktop comp down to tablet / mobile. Components reflow via
+   Bootstrap grid; type tokens scale here.
+   ========================================================================== */
+@media (max-width: 1199.98px) {
+    :root {
+        --h1Size: 64px;
+        --h1Lh: 64px;
+        --h2Size: 40px;
+        --h2Lh: 44px;
+        --sectionGap: 96px;
+    }
+
+    .featureRow {
+        gap: var(--space6);
+    }
+
+    .newsletter {
+        padding: var(--space7) var(--space6);
+    }
+
+    .brandFeature .brandFeatureBody {
+        padding: var(--space5) var(--space7);
+    }
+
+    .serviceBand .servicePanel {
+        padding: var(--space6) var(--space7);
+    }
+}
+
+@media (max-width: 991.98px) {
+    :root {
+        --h1Size: 48px;
+        --h1Lh: 52px;
+        --h2Size: 32px;
+        --h2Lh: 38px;
+        --trackingHeading: 5px;
+        --sectionGap: 72px;
+    }
+
+    .navMenu {
+        gap: var(--space4);
+    }
+
+    .featureRow,
+    .featureRow--reverse {
+        flex-direction: column;
+        gap: var(--space5);
+    }
+
+    .featureMedia,
+    .featureBody {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    /* Brand feature rows + service band stack; image first, then text */
+    .brandFeature,
+    .brandFeature--reverse,
+    .serviceBand {
+        flex-direction: column;
+    }
+
+    .brandFeature .brandFeatureMedia,
+    .brandFeature .brandFeatureBody,
+    .serviceBand .servicePanel,
+    .serviceBand .serviceMedia {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .brandFeature .brandFeatureMedia img,
+    .serviceBand .serviceMedia img {
+        min-height: 320px;
+    }
+
+    .brandFeature .brandFeatureBody {
+        padding: var(--space6) var(--space5);
+    }
+
+    .brandFeature .brandFeatureBody .innerLimit {
+        max-width: none;
+    }
+
+    .serviceBand .servicePanel {
+        padding: var(--space6) var(--space5);
+    }
+
+    /* allow the watermark to wrap on small screens so it stays legible */
+    .lineupWatermark {
+        white-space: normal;
+    }
+
+    .quickLinks {
+        gap: var(--space4);
+    }
+
+    .quickLink + .quickLink {
+        padding-left: var(--space4);
+    }
+
+    .promoBanner {
+        min-height: 520px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    :root {
+        --h1Size: 40px;
+        --h1Lh: 44px;
+        --h2Size: 28px;
+        --h2Lh: 34px;
+        --trackingHeading: 3px;
+        --sectionGap: 56px;
+    }
+
+    /* Mobile nav: hide inline menu, show toggle */
+    .navToggle {
+        display: inline-flex;
+    }
+
+    .navMenu {
+        display: none;
+        position: absolute;
+        top: var(--navHeight);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: var(--space3) var(--space4);
+        background-color: var(--white);
+        border-bottom: 1px solid var(--borderColor);
+        z-index: 100;
+    }
+
+    .navMenu.isOpen {
+        display: flex;
+    }
+
+    .navMenu .navLink {
+        padding: var(--space2) 0;
+    }
+
+    .siteNav .navInner {
+        position: relative;
+    }
+
+    .hero,
+    .quoteBand {
+        min-height: 420px;
+    }
+
+    .ctaBanner {
+        padding: var(--space5);
+    }
+
+    .newsletter {
+        padding: var(--space6) var(--space4);
+    }
+
+    .quickLinks {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .quickLink + .quickLink {
+        padding-left: 0;
+        padding-top: var(--space4);
+        border-left: 0;
+        border-top: 1px solid var(--borderColor);
+    }
+
+    .mediaTile .tileBody {
+        padding: var(--space4);
+    }
+
+    .promoBanner {
+        min-height: 440px;
+    }
+}
