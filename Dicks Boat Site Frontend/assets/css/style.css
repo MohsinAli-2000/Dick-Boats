@@ -654,15 +654,27 @@ blockquote,
     height: var(--navHeight);
     background-color: var(--white);
     border-bottom: 1px solid var(--borderColor);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .siteNav .navInner {
+    position: relative;           /* needed to center logo absolutely */
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: var(--navHeight);
 }
 
+/* Center logo via absolute positioning so nav and contact own the two ends */
 .navLogo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
     flex: 0 0 auto;
 }
 
@@ -671,11 +683,12 @@ blockquote,
     width: auto;
 }
 
+/* Left nav links — no auto-margin; space-between on navInner handles spacing */
 .navMenu {
     display: flex;
     align-items: center;
     gap: var(--space6);
-    margin: 0 auto;
+    flex: 0 0 auto;
 }
 
 .navLink {
@@ -693,8 +706,15 @@ blockquote,
     color: var(--slateBlue);
 }
 
-.navContact {
+/* Right group: contact info + search icon + mobile toggle */
+.navRight {
+    display: flex;
+    align-items: center;
+    gap: var(--space3);
     flex: 0 0 auto;
+}
+
+.navContact {
     text-align: right;
     line-height: 1.2;
 }
@@ -713,6 +733,25 @@ blockquote,
     color: var(--blue);
 }
 
+/* Search icon button */
+.navSearchBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: var(--blue);
+    font-size: 20px;
+    padding: var(--space1) var(--space2);
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.navSearchBtn:hover {
+    color: var(--slateBlue);
+}
+
 /* Mobile toggle */
 .navToggle {
     display: none;
@@ -724,14 +763,37 @@ blockquote,
 
 
 /* ---- 7.2 Footer + Newsletter ------------------------------------------ */
+/* Figma layout: white info area (66.67%) left + dark navy panel (33.33%) right,
+   both stretching to the full footer height with no container constraint. */
 .siteFooter {
     background-color: var(--white);
-    border-top: 1px solid var(--borderColor);
 }
 
-.footerMain {
-    padding-top: var(--space8);
-    padding-bottom: var(--space8);
+.footerInner {
+    display: flex;
+    align-items: stretch;
+}
+
+/* White left section — 4 sub-columns, bordered top + bottom */
+.footerLeft {
+    flex: 0 0 66.67%;
+    max-width: 66.67%;
+    background-color: var(--white);
+    border-top: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor);
+    padding: var(--space8) 0;
+}
+
+/* Dark navy right panel — edge-to-edge, no container constraint */
+.footerRight {
+    flex: 1 1 auto;
+    background-color: var(--blue);
+    color: var(--white);
+    padding: var(--space8) var(--space7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .footerColTitle {
@@ -761,7 +823,7 @@ blockquote,
 
 .footerLogo img {
     max-width: 200px;
-    margin-bottom: var(--space4);
+    margin: 0 auto var(--space4);
 }
 
 .footerAddress {
@@ -769,6 +831,7 @@ blockquote,
     font-size: var(--bodySize);
     line-height: var(--bodyLh);
     color: var(--blackish);
+    font-style: normal;
     margin-bottom: var(--space3);
 }
 
@@ -780,16 +843,10 @@ blockquote,
     letter-spacing: 1.92px;
     color: var(--blue);
     text-transform: uppercase;
+    display: block;
 }
 
-/* Newsletter — dark navy panel */
-.newsletter {
-    background-color: var(--blue);
-    color: var(--white);
-    padding: var(--space8) var(--space7);
-    height: 100%;
-}
-
+/* Newsletter — inside .footerRight */
 .newsletterTitle {
     font-family: var(--fontHeading);
     font-weight: 700;
@@ -809,6 +866,7 @@ blockquote,
 .footerBottom {
     border-top: 1px solid var(--borderColor);
     padding: var(--space4) 0;
+    text-align: center;
 }
 
 .footerCopy {
@@ -816,12 +874,13 @@ blockquote,
     font-size: var(--bodySize);
     color: var(--blue);
     opacity: 0.6;
-    text-align: center;
+    margin: 0;
 }
 
 .socialList {
     display: flex;
     gap: var(--space3);
+    justify-content: center;
 }
 
 .socialList a {
@@ -833,6 +892,7 @@ blockquote,
     border-radius: var(--radiusCircle);
     color: var(--white);
     border: 1px solid rgba(255, 255, 255, 0.4);
+    font-size: 18px;
 }
 
 .socialList a:hover {
@@ -844,7 +904,7 @@ blockquote,
 /* ---- 7.3 Hero ---------------------------------------------------------- */
 .hero {
     position: relative;
-    min-height: 600px;
+    min-height: 900px;
     display: flex;
     align-items: center;
     background-color: var(--blue);
@@ -858,7 +918,7 @@ blockquote,
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(0deg, rgba(0, 52, 105, 0.55), rgba(0, 52, 105, 0.35));
+    background: rgba(25, 25, 25, 0.40);
 }
 
 /* Dark flat overlay variant (e.g. text over a neutral/placeholder background) */
@@ -1254,6 +1314,7 @@ blockquote,
 .mediaTile {
     position: relative;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
     background-color: var(--lightGrayD9);
 }
@@ -1290,13 +1351,15 @@ blockquote,
     width: 100%;
     padding: var(--space5);
     color: var(--white);
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .mediaTile .tileTitle {
     font-family: var(--fontHeading);
     font-weight: 700;
-    font-size: var(--h3Size);
-    line-height: var(--h3Lh);
+    font-size: var(--h2Size);
+    line-height: var(--h2Lh);
     letter-spacing: var(--trackingHeading);
     text-transform: uppercase;
     color: var(--white);
@@ -1446,7 +1509,79 @@ blockquote,
 }
 
 
-/* ---- 7.15 Promo banner (full-width image band, centered content) ------ */
+/* ---- 7.14b Categories grid (full-viewport-width, zero gutters) -------- */
+/* Tiles span edge-to-edge with no section padding, matching the Figma layout
+   where each tile fills exactly 1/3 of the viewport per row. */
+.catSection {
+    padding: 0;
+    overflow: hidden;
+}
+
+
+/* ---- 7.15 Promo section — Owl Carousel with full-bleed slides ---------- */
+.promoSection {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Each slide: full-bleed video or image background, flex-centered content */
+.promoSlide {
+    position: relative;
+    min-height: 720px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Video fills the slide edge-to-edge, behind the overlay */
+.promoSlide .promoVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Dark overlay matching Figma (#191919 @ 40%) */
+.promoSlide .promoOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(25, 25, 25, 0.40);
+    z-index: 1;
+}
+
+.promoSlide .promoInner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.promoSlide .promoTitle {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h1Size);
+    line-height: var(--h1Lh);
+    letter-spacing: var(--trackingHeading);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: var(--space3);
+}
+
+.promoSlide .promoText {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--white);
+    margin-bottom: var(--space5);
+}
+
+
+/* Keep .promoBanner for backward compat on other pages */
 .promoBanner {
     position: relative;
     min-height: 720px;
@@ -1461,21 +1596,11 @@ blockquote,
     overflow: hidden;
 }
 
-.promoBanner video,
-.promoBanner > img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-}
-
 .promoBanner::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 52, 105, 0.6);
+    background: rgba(25, 25, 25, 0.40);
     z-index: 1;
 }
 
@@ -2150,7 +2275,7 @@ blockquote,
         gap: var(--space6);
     }
 
-    .newsletter {
+    .footerRight {
         padding: var(--space7) var(--space6);
     }
 
@@ -2221,6 +2346,20 @@ blockquote,
         padding: var(--space6) var(--space5);
     }
 
+    /* Footer: stack white columns above navy panel on tablets */
+    .footerInner {
+        flex-direction: column;
+    }
+
+    .footerLeft {
+        flex: none;
+        max-width: 100%;
+    }
+
+    .footerRight {
+        flex: none;
+    }
+
     /* allow the watermark to wrap on small screens so it stays legible */
     .lineupWatermark {
         white-space: normal;
@@ -2234,6 +2373,7 @@ blockquote,
         padding-left: var(--space4);
     }
 
+    .promoSlide,
     .promoBanner {
         min-height: 520px;
     }
@@ -2249,9 +2389,17 @@ blockquote,
         --sectionGap: 56px;
     }
 
-    /* Mobile nav: hide inline menu, show toggle */
+    /* Mobile nav: show toggle, hide contact details to save space */
     .navToggle {
         display: inline-flex;
+    }
+
+    .navContact {
+        display: none;
+    }
+
+    .navSearchBtn {
+        display: none;
     }
 
     .navMenu {
@@ -2277,10 +2425,6 @@ blockquote,
         padding: var(--space2) 0;
     }
 
-    .siteNav .navInner {
-        position: relative;
-    }
-
     .hero,
     .quoteBand {
         min-height: 420px;
@@ -2290,8 +2434,12 @@ blockquote,
         padding: var(--space5);
     }
 
-    .newsletter {
+    .footerRight {
         padding: var(--space6) var(--space4);
+    }
+
+    .footerLeft {
+        padding: var(--space6) 0;
     }
 
     .quickLinks {
@@ -2310,6 +2458,7 @@ blockquote,
         padding: var(--space4);
     }
 
+    .promoSlide,
     .promoBanner {
         min-height: 440px;
     }

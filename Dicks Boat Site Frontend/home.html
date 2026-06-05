@@ -38,25 +38,34 @@
                 <div class="row">
                     <div class="col-xl-10 mx-auto">
                         <div class="navInner">
-                            <a href="home.html" class="navLogo" aria-label="Dick's Boat Shop home">
-                                <img src="./assets/images/home/001e44082f5a7c2b243c8e321fdd13cd44d9a4ea.png"
-                                    alt="Dick's Boat Shop">
-                            </a>
 
-                            <button class="navToggle" type="button" aria-label="Toggle menu" id="navToggle">
-                                <i class="fa-solid fa-bars"></i>
-                            </button>
-
+                            <!-- Left: Navigation links -->
                             <nav class="navMenu" id="navMenu">
                                 <a href="#" class="navLink isActive">Inventory</a>
                                 <a href="#" class="navLink">Service</a>
                                 <a href="#" class="navLink">Our World</a>
                             </nav>
 
-                            <div class="navContact">
-                                <div class="navContactLabel">Call or Text</div>
-                                <a href="tel:+18018252173" class="navContactPhone">(801) 825-2173</a>
+                            <!-- Center: Logo (absolutely positioned) -->
+                            <a href="home.html" class="navLogo" aria-label="Dick's Boat Shop home">
+                                <img src="./assets/images/home/001e44082f5a7c2b243c8e321fdd13cd44d9a4ea.png"
+                                    alt="Dick's Boat Shop">
+                            </a>
+
+                            <!-- Right: Contact + Search + Mobile Toggle -->
+                            <div class="navRight">
+                                <div class="navContact">
+                                    <div class="navContactLabel">Call or Text</div>
+                                    <a href="tel:+18018252173" class="navContactPhone">(801) 825-2173</a>
+                                </div>
+                                <button class="navSearchBtn" aria-label="Search">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                                <button class="navToggle" type="button" aria-label="Toggle menu" id="navToggle">
+                                    <i class="fa-solid fa-bars"></i>
+                                </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -109,7 +118,7 @@
                     <div class="row">
                         <div class="col-xl-10 mx-auto">
                             <div class="row">
-                                <div class="col-md-6 mb-4 mb-md-0">
+                                <div class="col-md-6 mb-4 mb-md-0 px-1">
                                     <div class="mediaTile tileTall">
                                         <img src="./assets/images/home/08f85012bd626a01383507cef3ce9c993e947ff3.png"
                                             alt="New boats for sale">
@@ -119,9 +128,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 px-1">
                                     <div class="mediaTile tileTall">
-                                        <img src="./assets/images/home/bf1faea272182d086d2be1b11d58be7baa832bb9.png"
+                                        <img src="./assets/images/home/ce14ece51e3168198a772be3ff33464085ec2ef8.png"
                                             alt="Pre-owned boats">
                                         <div class="tileBody">
                                             <h2 class="tileTitle">Pre-Owned Boats</h2>
@@ -222,88 +231,84 @@
             </section>
 
             <!-- ===================== CATEGORIES GRID ===================== -->
-            <section class="section">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-10 mx-auto">
-                            <div class="row">
-                                <!-- Boat Sales -->
-                                <div class="col-lg-4 col-sm-6 mb-4">
-                                    <a href="#" class="mediaTile tileWide d-block">
-                                        <img src="./assets/images/home/Rectangle 8.png" alt="Boat Sales">
-                                        <div class="tileBody">
-                                            <h3 class="tileTitle">Boat Sales</h3>
-                                            <p class="tileText small">Find your perfect day on the water with our premium
-                                                lineup of Yamaha sport boats, Skeeter fishing rigs, and G3 aluminum
-                                                boats.</p>
-                                            <span class="linkBtn whiteText">Explore</span>
-                                        </div>
-                                    </a>
+            <section class="catSection">
+                <div class="container-fluid px-0">
+                    <div class="row no-gutters">
+
+                        <!-- Boat Sales -->
+                        <div class="col-lg-4 col-sm-6 col-12 p-1">
+                            <a href="#" class="mediaTile tileWide">
+                                <img src="./assets/images/home/Rectangle 78.png" alt="Boat Sales">
+                                <div class="tileBody">
+                                    <h3 class="tileTitle">Boat Sales</h3>
+                                    <p class="tileText">Find your perfect day on the water with our premium lineup of
+                                        high-performance Yamaha sport boats, Skeeter tournament fishing rigs, and
+                                        versatile G3 aluminum boats.</p>
                                 </div>
-                                <!-- PWC Sales -->
-                                <div class="col-lg-4 col-sm-6 mb-4">
-                                    <a href="#" class="mediaTile tileWide d-block">
-                                        <img src="./assets/images/home/68245d7abd0f2b06075c31813642292b3acb640b.png"
-                                            alt="PWC Sales">
-                                        <div class="tileBody">
-                                            <h3 class="tileTitle">PWC Sales</h3>
-                                            <p class="tileText small">Dominate the lake with the industry's top-selling
-                                                personal watercraft, the Yamaha WaveRunner series.</p>
-                                            <span class="linkBtn whiteText">Explore</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Snowmobiles -->
-                                <div class="col-lg-4 col-sm-6 mb-4">
-                                    <a href="#" class="mediaTile tileWide d-block">
-                                        <img src="./assets/images/home/Rectangle 88.png" alt="Snowmobiles">
-                                        <div class="tileBody">
-                                            <h3 class="tileTitle">Snowmobiles</h3>
-                                            <p class="tileText small">Conquer Utah's legendary backcountry powder with
-                                                hard-hitting, reliable Yamaha snowmobiles.</p>
-                                            <span class="linkBtn whiteText">Explore</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Sell / Trade -->
-                                <div class="col-lg-4 col-sm-6 mb-4">
-                                    <a href="#" class="mediaTile tileWide d-block">
-                                        <img src="./assets/images/home/Rectangle 357.png" alt="Sell or Trade">
-                                        <div class="tileBody">
-                                            <h3 class="tileTitle">Sell / Trade</h3>
-                                            <p class="tileText small">Upgrade your adventures by letting our team give you
-                                                top dollar for your current vessel toward your next dream ride.</p>
-                                            <span class="linkBtn whiteText">Explore</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Service -->
-                                <div class="col-lg-4 col-sm-6 mb-4">
-                                    <a href="#" class="mediaTile tileWide d-block">
-                                        <img src="./assets/images/home/Rectangle 352.png" alt="Service">
-                                        <div class="tileBody">
-                                            <h3 class="tileTitle">Service</h3>
-                                            <p class="tileText small">Keep downtime to a minimum with expert maintenance
-                                                and repairs from our factory-authorized, certified technicians.</p>
-                                            <span class="linkBtn whiteText">Explore</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Pro Shop -->
-                                <div class="col-lg-4 col-sm-6 mb-4">
-                                    <a href="#" class="mediaTile tileWide d-block">
-                                        <img src="./assets/images/home/9023449012e1755e2af2320084ba53f2833b2776.png"
-                                            alt="Pro Shop">
-                                        <div class="tileBody">
-                                            <h3 class="tileTitle">Pro Shop</h3>
-                                            <p class="tileText small">Outfit your entire lake day with premium watersports
-                                                gear, safety equipment, and genuine Yamalube parts.</p>
-                                            <span class="linkBtn whiteText">Explore</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
+
+                        <!-- PWC Sales -->
+                        <div class="col-lg-4 col-sm-6 col-12 p-1">
+                            <a href="#" class="mediaTile tileWide">
+                                <img src="./assets/images/home/Rectangle 350.png" alt="PWC Sales">
+                                <div class="tileBody">
+                                    <h3 class="tileTitle">PWC Sales</h3>
+                                    <p class="tileText">Dominate the lake and experience unmatched thrill with the
+                                        industry's top-selling personal watercraft, the Yamaha WaveRunner series.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Snowmobiles -->
+                        <div class="col-lg-4 col-sm-6 col-12 p-1">
+                            <a href="#" class="mediaTile tileWide">
+                                <img src="./assets/images/home/Rectangle 88.png" alt="Snowmobiles">
+                                <div class="tileBody">
+                                    <h3 class="tileTitle">Snowmobiles</h3>
+                                    <p class="tileText">Transition seamlessly into winter and conquer Utah's legendary
+                                        backcountry powder with hard-hitting, reliable Yamaha snowmobiles.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Sell / Trade -->
+                        <div class="col-lg-4 col-sm-6 col-12 p-1">
+                            <a href="#" class="mediaTile tileWide">
+                                <img src="./assets/images/home/Rectangle 357.png" alt="Sell or Trade">
+                                <div class="tileBody">
+                                    <h3 class="tileTitle">Sell/Trade</h3>
+                                    <p class="tileText">Upgrade your adventures effortlessly by letting our team give
+                                        you top dollar for your current vessel toward your next dream ride.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Service -->
+                        <div class="col-lg-4 col-sm-6 col-12 p-1">
+                            <a href="#" class="mediaTile tileWide">
+                                <img src="./assets/images/home/Rectangle 353.png" alt="Service">
+                                <div class="tileBody">
+                                    <h3 class="tileTitle">Service</h3>
+                                    <p class="tileText">Keep your downtime to an absolute minimum with expert
+                                        maintenance and repairs from our factory-authorized, certified marine
+                                        technicians.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Pro Shop -->
+                        <div class="col-lg-4 col-sm-6 col-12 p-1">
+                            <a href="#" class="mediaTile tileWide">
+                                <img src="./assets/images/home/Rectangle 352.png" alt="Pro Shop">
+                                <div class="tileBody">
+                                    <h3 class="tileTitle">Pro Shop</h3>
+                                    <p class="tileText">Outfit your entire lake day with our premium selection of
+                                        watersports gear, safety equipment, and genuine Yamalube parts.</p>
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -343,17 +348,24 @@
                 </div>
             </section>
 
-            <!-- ===================== PROMOTION BANNER ===================== -->
-            <section class="promoBanner" style="background-image:url('./assets/images/home/ce14ece51e3168198a772be3ff33464085ec2ef8.png');">
-                <div class="container-fluid promoInner">
-                    <div class="row">
-                        <div class="col-xl-8 mx-auto">
-                            <h2 class="promoTitle">Promotion: Lorem Ipsum</h2>
-                            <p class="promoText lead">Promotional Subtext goes here to highlight a current offer or
-                                seasonal event.</p>
-                            <a href="#" class="btnBase whiteBtn">Learn More</a>
+            <!-- ===================== PROMOTION BANNER (OWL CAROUSEL) ===================== -->
+            <section class="promoSection">
+                <div class="owl-carousel promoOwl">
+
+                    <!-- Slide 1 -->
+                    <div class="promoSlide" style="background-image:url('./assets/images/home/ce14ece51e3168198a772be3ff33464085ec2ef8.png');">
+                        <div class="promoOverlay"></div>
+                        <div class="container-fluid promoInner">
+                            <div class="row">
+                                <div class="col-xl-6 mx-auto text-center">
+                                    <h2 class="promoTitle">Promotion: Lorem Ipsum</h2>
+                                    <p class="promoText">Promotional Subtext</p>
+                                    <a href="#" class="btnBase blueBtn">Event Details</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
@@ -361,7 +373,7 @@
             <section class="section">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-10 mx-auto">
+                        <div class="col-xl-9 mx-auto">
                             <div class="featureRow">
                                 <div class="featureMedia">
                                     <img src="./assets/images/home/458b8fa0844ddc38d53a91841197012dd0237c27.jpg"
@@ -388,94 +400,92 @@
 
         <!-- ===================== FOOTER ===================== -->
         <footer class="siteFooter">
-            <div class="footerMain">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-10 mx-auto">
-                            <div class="row">
 
-                                <!-- Contact column -->
-                                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0 text-center text-lg-left">
-                                    <div class="footerLogo">
-                                        <img src="./assets/images/home/001e44082f5a7c2b243c8e321fdd13cd44d9a4ea.png"
-                                            alt="Dick's Boat Shop">
-                                    </div>
-                                    <address class="footerAddress">601 E 700 S,<br>Clearfield, UT 84015</address>
-                                    <a href="tel:+18018252173" class="footerPhone">(801) 825-2173</a>
+            <div class="footerInner">
+
+                <!-- Left: white area — logo + 3 nav columns (66.67% width) -->
+                <div class="footerLeft">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <!-- Logo + Contact -->
+                            <div class="col-xl-3 col-md-6 mb-5 mb-xl-0 text-center">
+                                <div class="footerLogo">
+                                    <img src="./assets/images/home/001e44082f5a7c2b243c8e321fdd13cd44d9a4ea.png"
+                                        alt="Dick's Boat Shop">
                                 </div>
-
-                                <!-- Sales & Services -->
-                                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                    <h6 class="footerColTitle">Sales &amp; Services</h6>
-                                    <ul class="footerList">
-                                        <li><a href="#" class="footerLink">All Boats</a></li>
-                                        <li><a href="#" class="footerLink">New Boats</a></li>
-                                        <li><a href="#" class="footerLink">Pre-Owned</a></li>
-                                        <li><a href="#" class="footerLink">PWCs</a></li>
-                                        <li><a href="#" class="footerLink">Snowmobiles</a></li>
-                                        <li><a href="#" class="footerLink">Trailer Sales</a></li>
-                                        <li><a href="#" class="footerLink">Service Your Boat</a></li>
-                                        <li><a href="#" class="footerLink">Trade / Sell Your Boat</a></li>
-                                        <li><a href="#" class="footerLink">Financing</a></li>
-                                    </ul>
-                                </div>
-
-                                <!-- Brands -->
-                                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                                    <h6 class="footerColTitle">Brands</h6>
-                                    <ul class="footerList">
-                                        <li><a href="#" class="footerLink">SunCatcher</a></li>
-                                        <li><a href="#" class="footerLink">G3 Boats</a></li>
-                                        <li><a href="#" class="footerLink">Skeeter</a></li>
-                                        <li><a href="#" class="footerLink">Yamaha</a></li>
-                                    </ul>
-
-                                    <h6 class="footerColTitle mt4">Company</h6>
-                                    <ul class="footerList">
-                                        <li><a href="#" class="footerLink">Pro Shop</a></li>
-                                        <li><a href="#" class="footerLink">About</a></li>
-                                        <li><a href="#" class="footerLink">Awards</a></li>
-                                        <li><a href="#" class="footerLink">Meet Our Crew</a></li>
-                                        <li><a href="#" class="footerLink">Contact</a></li>
-                                    </ul>
-                                </div>
-
-                                <!-- Newsletter -->
-                                <div class="col-lg-4">
-                                    <div class="newsletter">
-                                        <h2 class="newsletterTitle">Enter our World</h2>
-                                        <p class="newsletterText">Our newsletter informs you of promotions, events, Dick's
-                                            Boat Shop news, and more.</p>
-                                        <form class="inputInline" onsubmit="return false;">
-                                            <input type="email" class="input" placeholder="Enter your email address"
-                                                aria-label="Email address">
-                                            <button type="submit" class="inputSubmit" aria-label="Subscribe">
-                                                <i class="fa-solid fa-arrow-right"></i>
-                                            </button>
-                                        </form>
-                                        <div class="socialList mt4">
-                                            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                                            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <address class="footerAddress">601 E 700 S,<br>Clearfield, UT 84015</address>
+                                <a href="tel:+18018252173" class="footerPhone">(801) 825-2173</a>
                             </div>
+
+                            <!-- Sales & Services -->
+                            <div class="col-xl-3 col-md-6 mb-5 mb-xl-0">
+                                <h6 class="footerColTitle">Sales &amp; Services</h6>
+                                <ul class="footerList">
+                                    <li><a href="#" class="footerLink">All Boats</a></li>
+                                    <li><a href="#" class="footerLink">New Boats</a></li>
+                                    <li><a href="#" class="footerLink">Pre-Owned</a></li>
+                                    <li><a href="#" class="footerLink">PWCs</a></li>
+                                    <li><a href="#" class="footerLink">Snowmobiles</a></li>
+                                    <li><a href="#" class="footerLink">Trailer Sales</a></li>
+                                    <li><a href="#" class="footerLink">Service Your Boat</a></li>
+                                    <li><a href="#" class="footerLink">Trade / Sell Your Boat</a></li>
+                                    <li><a href="#" class="footerLink">Financing</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Brands -->
+                            <div class="col-xl-3 col-md-6 mb-5 mb-xl-0">
+                                <h6 class="footerColTitle">Brands</h6>
+                                <ul class="footerList">
+                                    <li><a href="#" class="footerLink">SunCatcher</a></li>
+                                    <li><a href="#" class="footerLink">G3 Boats</a></li>
+                                    <li><a href="#" class="footerLink">Skeeter</a></li>
+                                    <li><a href="#" class="footerLink">Yamaha</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Company -->
+                            <div class="col-xl-3 col-md-6 mb-5 mb-xl-0">
+                                <h6 class="footerColTitle">Company</h6>
+                                <ul class="footerList">
+                                    <li><a href="#" class="footerLink">Pro Shop</a></li>
+                                    <li><a href="#" class="footerLink">About</a></li>
+                                    <li><a href="#" class="footerLink">Awards</a></li>
+                                    <li><a href="#" class="footerLink">Meet Our Crew</a></li>
+                                    <li><a href="#" class="footerLink">Contact</a></li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
+                <!-- Right: dark navy newsletter panel (33.33% width, edge-to-edge) -->
+                <div class="footerRight">
+                    <h2 class="newsletterTitle">Enter Our<br>World</h2>
+                    <p class="newsletterText">Our Newsletter informs of promotions, events, Dick's Boat Shop news, and
+                        more.</p>
+                    <form class="inputInline" onsubmit="return false;">
+                        <input type="email" class="input" placeholder="Enter your email address"
+                            aria-label="Email address">
+                        <button type="submit" class="inputSubmit" aria-label="Subscribe">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                    <div class="socialList mt4">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
             </div>
 
+            <!-- Bottom copyright bar -->
             <div class="footerBottom">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-10 mx-auto">
-                            <p class="footerCopy">Copyright &nbsp;|&nbsp; Powered By MDS Brand &nbsp;|&nbsp; Sitemap</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="footerCopy">Copyright &nbsp;|&nbsp; Powered By MDS Brand &nbsp;|&nbsp; Sitemap</p>
             </div>
+
         </footer>
 
     </div>
