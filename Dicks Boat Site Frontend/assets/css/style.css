@@ -2094,6 +2094,92 @@ blockquote,
 }
 
 
+/* ---- 7.32 Service page ------------------------------------------------- */
+
+/* Hero height override */
+.serviceHero {
+    min-height: 600px;
+}
+
+/* Yamaha strip */
+.yamahaStrip {
+    border-top: 1px solid var(--lightGrayE6);
+    padding: var(--space7) 0;
+}
+
+.yamahaStripInner {
+    display: flex;
+    align-items: center;
+    gap: var(--space8);
+    justify-content: center;
+}
+
+.yamahaLogo {
+    flex-shrink: 0;
+    width: 240px;
+}
+
+.yamahaLogo img {
+    width: 100%;
+    height: auto;
+}
+
+/* Service cards grid */
+.serviceCard {
+    margin-bottom: var(--space7);
+}
+
+.serviceCard .serviceCardMedia {
+    aspect-ratio: 400 / 240;
+    overflow: hidden;
+    margin-bottom: var(--space4);
+    background-color: var(--lightGrayD9);
+}
+
+.serviceCard .serviceCardMedia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.serviceCard .secondaryHeading {
+    margin-bottom: var(--space2);
+}
+
+/* Why Choose benefit item (icon above, vertical) */
+.whyItem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space3);
+}
+
+.whyItem .whyIcon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.whyItem .whyIcon img {
+    width: 100%;
+    height: auto;
+}
+
+.whyItem .secondaryHeading {
+    margin-bottom: var(--space2);
+}
+
+.whyItem p {
+    color: var(--white);
+}
+
+/* Form section divider */
+.formSection {
+    border-top: 1px solid var(--lightGrayE6);
+}
+
+
 /* ============================================================================
    8. UTILITY CLASSES
    ========================================================================== */
@@ -2404,6 +2490,17 @@ blockquote,
     .promoBanner {
         min-height: 520px;
     }
+
+    /* Service page */
+    .yamahaStripInner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space4);
+    }
+
+    .yamahaLogo {
+        width: 180px;
+    }
 }
 
 @media (max-width: 767.98px) {
@@ -2454,7 +2551,7 @@ blockquote,
 
     .hero,
     .quoteBand {
-        min-height: 420px;
+        min-height: 600px;
     }
 
     .ctaBanner {
@@ -2488,5 +2585,8 @@ blockquote,
     .promoSlide,
     .promoBanner {
         min-height: 440px;
+    }
+    .brandStrip{
+        justify-content: center;
     }
 }
