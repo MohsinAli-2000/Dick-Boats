@@ -371,10 +371,9 @@ blockquote,
 }
 
 .sectionSm {
-    padding-top: var(--space7);
+    padding-top: var(--space9);
     padding-bottom: var(--space7);
 }
-
 .sectionTint {
     background-color: var(--bgAlt);
 }
@@ -2364,6 +2363,54 @@ blockquote,
 }
 
 
+/* ---- 7.33 Crew card (image + name + position, centered) --------------- */
+/* Borderless cards, centered text, gray placeholder until real photos exist.
+   Name: Rajdhani Bold 20px navy uppercase. Position: Asap 16px slate blue. */
+.crewCard {
+    text-align: center;
+    margin-bottom: var(--space7);
+}
+
+.crewCard .crewMedia {
+    aspect-ratio: 7 / 8;
+    background-color: var(--lightGrayD9);
+    overflow: hidden;
+    margin-bottom: var(--space3);
+}
+
+.crewCard .crewMedia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.crewName {
+    font-family: var(--fontHeading);
+    font-weight: 700;
+    font-size: var(--h6Size);
+    line-height: var(--h6Lh);
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: var(--space1);
+}
+
+.crewPosition {
+    font-family: var(--fontBody);
+    font-size: var(--bodySize);
+    line-height: var(--bodyLh);
+    color: var(--slateBlue);
+    margin: 0;
+}
+
+/* The .mediaPlaceholder inside .crewMedia fills the container */
+.crewCard .crewMedia .mediaPlaceholder {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+}
+
+
 /* ============================================================================
    RESPONSIVE — fluid scaling of the oversized display type from the
    1920px desktop comp down to tablet / mobile. Components reflow via
@@ -2409,6 +2456,11 @@ blockquote,
         --h2Lh: 38px;
         --trackingHeading: 5px;
         --sectionGap: 72px;
+    }
+
+    /* Crew: tighten bottom gap between cards on tablet */
+    .crewCard {
+        margin-bottom: var(--space6);
     }
 
     .navMenu {
@@ -2588,5 +2640,10 @@ blockquote,
     }
     .brandStrip{
         justify-content: center;
+    }
+
+    /* Crew: 2 columns on mobile, less bottom gap */
+    .crewCard {
+        margin-bottom: var(--space5);
     }
 }
