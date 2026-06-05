@@ -500,6 +500,18 @@ blockquote,
     color: var(--white);
     box-shadow: var(--shadowMd);
 }
+.ttBtn {
+    background-color: none;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.ttBtn:hover {
+    background-color: var(--white);
+    border-color: var(--white);
+    color: var(--blue);
+    box-shadow: var(--shadowMd);
+}
 
 /* Ghost — text-only, subtle hover fill */
 .ghostBtn {
