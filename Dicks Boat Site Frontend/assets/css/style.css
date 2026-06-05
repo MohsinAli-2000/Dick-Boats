@@ -2049,9 +2049,14 @@ blockquote,
     position: relative;
     margin-top: -158px;     /* pulls the card up over the hero (matches comp) */
     z-index: 2;
+    margin-left: 150px;
     background-color: var(--white);
     border-bottom: 1px solid var(--inputBorder);
     padding: var(--space7) var(--space7) var(--space6);
+}
+
+.awards-sec{
+    margin: 100px 0px;
 }
 
 
@@ -2301,6 +2306,12 @@ blockquote,
 
     .serviceBand .servicePanel {
         padding: var(--space6) var(--space7);
+    }
+    .ss-main{
+        margin: 0px auto !important;
+    }
+    .heroOverlapCard{
+        margin-left: 0px;
     }
 }
 
