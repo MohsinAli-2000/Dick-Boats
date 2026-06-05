@@ -257,7 +257,7 @@ button {
 .secondaryWhiteHeading {
     font-size: var(--h3Size);
     line-height: var(--h3Lh);
-    letter-spacing: var(--trackingHeading);
+    /* letter-spacing: var(--trackingHeading); */
 }
 
 .tertiaryHeading {
