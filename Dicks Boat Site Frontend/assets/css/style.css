@@ -500,6 +500,11 @@ blockquote,
     color: var(--white);
     box-shadow: var(--shadowMd);
 }
+.secBtn {
+    background-color: #537F94;
+    color: var(--white);
+    box-shadow: var(--shadowMd);
+}
 .ttBtn {
     background-color: none;
     color: var(--white);
