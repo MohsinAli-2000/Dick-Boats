@@ -1912,6 +1912,12 @@ blockquote,
 .benefitItem {
     display: flex;
     gap: var(--space4);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.serviceUpgrade {
+    margin: 100px 0;
 }
 
 .benefitItem .benefitBody .benefitTitle {
@@ -2544,6 +2550,11 @@ blockquote,
     margin: 80px 0;
 }
 
+.formSection {
+    padding: 80px 0;
+    border-top: 1px solid #E6E6E6;
+}
+
 /* ============================================================================
    RESPONSIVE — fluid scaling of the oversized display type from the
    1920px desktop comp down to tablet / mobile. Components reflow via
@@ -2591,6 +2602,14 @@ blockquote,
         --h2Lh: 38px;
         --trackingHeading: 5px;
         --sectionGap: 72px;
+    }
+
+    .formSection {
+        padding: 60px 0;
+    }
+
+    .serviceUpgrade {
+        margin: 60px 0;
     }
 
     .proShopHeroSection {
@@ -2733,6 +2752,10 @@ blockquote,
         --h2Lh: 34px;
         --trackingHeading: 3px;
         --sectionGap: 56px;
+    }
+
+    .serviceUpgrade {
+        margin: 40px 0;
     }
 
     .proShopHeroSection {
