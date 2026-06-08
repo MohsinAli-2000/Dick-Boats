@@ -1716,6 +1716,7 @@ blockquote,
 .brandFeature {
     display: flex;
     align-items: center;
+    margin: 100px 0;
 }
 
 .brandFeature .brandFeatureMedia,
@@ -2569,6 +2570,10 @@ blockquote,
         --sectionGap: 72px;
     }
 
+    .brandFeature{
+        margin: 60px 0;
+    }
+
     .otherLinkSection {
         margin-bottom: 60px;
     }
@@ -2693,6 +2698,10 @@ blockquote,
         --h2Lh: 34px;
         --trackingHeading: 3px;
         --sectionGap: 56px;
+    }
+
+    .brandFeature{
+        margin: 40px 0;
     }
 
     .footerLinksWrapper {
