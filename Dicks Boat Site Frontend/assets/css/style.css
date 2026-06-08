@@ -372,6 +372,16 @@ blockquote,
     margin: 80px 0;
 }
 
+.proShopLogoSection {
+    padding: 60px 0;
+    border-top: 1px solid #D9D9D9;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.proShopFeatures {
+    margin: 100px 0;
+}
+
 .sectionTint {
     background-color: var(--bgAlt);
 }
@@ -2525,6 +2535,15 @@ blockquote,
     margin: 100px 0;
 }
 
+.proShopAddressWrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.proShopHeroSection {
+    margin: 80px 0;
+}
+
 /* ============================================================================
    RESPONSIVE — fluid scaling of the oversized display type from the
    1920px desktop comp down to tablet / mobile. Components reflow via
@@ -2572,6 +2591,14 @@ blockquote,
         --h2Lh: 38px;
         --trackingHeading: 5px;
         --sectionGap: 72px;
+    }
+
+    .proShopHeroSection {
+        margin: 60px 0;
+    }
+
+    .proShopFeatures {
+        margin: 60px 0;
     }
 
     .aboutSection {
@@ -2706,6 +2733,14 @@ blockquote,
         --h2Lh: 34px;
         --trackingHeading: 3px;
         --sectionGap: 56px;
+    }
+
+    .proShopHeroSection {
+        margin: 40px 0;
+    }
+
+    .proShopFeatures {
+        margin: 40px 0;
     }
 
     .aboutSection {
