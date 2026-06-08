@@ -2521,6 +2521,10 @@ blockquote,
     text-transform: uppercase;
 }
 
+.aboutSection {
+    margin: 100px 0;
+}
+
 /* ============================================================================
    RESPONSIVE — fluid scaling of the oversized display type from the
    1920px desktop comp down to tablet / mobile. Components reflow via
@@ -2570,7 +2574,11 @@ blockquote,
         --sectionGap: 72px;
     }
 
-    .brandFeature{
+    .aboutSection {
+        margin: 60px 0;
+    }
+
+    .brandFeature {
         margin: 60px 0;
     }
 
@@ -2683,7 +2691,7 @@ blockquote,
         margin: 60px 0;
     }
 
-    .whyItem{
+    .whyItem {
         text-align: center;
         justify-content: center;
         align-items: center;
@@ -2700,7 +2708,11 @@ blockquote,
         --sectionGap: 56px;
     }
 
-    .brandFeature{
+    .aboutSection {
+        margin: 40px 0;
+    }
+
+    .brandFeature {
         margin: 40px 0;
     }
 
