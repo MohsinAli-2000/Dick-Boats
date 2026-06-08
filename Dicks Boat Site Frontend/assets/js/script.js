@@ -1,25 +1,32 @@
-/* ============================================================================
-   DICK'S BOAT SHOP — site scripts
-   ========================================================================== */
-(function () {
-    "use strict";
-
-    /* ---- Mobile navigation toggle ---- */
-    var navToggle = document.getElementById("navToggle");
-    var navMenu = document.getElementById("navMenu");
-
-    if (navToggle && navMenu) {
-        navToggle.addEventListener("click", function () {
-            navMenu.classList.toggle("isOpen");
-        });
-
-        // Close the menu when a link is tapped (mobile)
-        navMenu.querySelectorAll(".navLink").forEach(function (link) {
-            link.addEventListener("click", function () {
-                navMenu.classList.remove("isOpen");
-            });
+$(document).ready(function () {
+    // ================================++++++++++++++++++++====================
+    // home page code starts here
+    if ($('.promoSlider').length) {
+        $('.promoSlider').owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            navText: ['<img src="./assets/images/home/left-arrow.svg" alt="prev"/>', '<img src="./assets/images/home/right-arrow.svg" alt="next"/>'],
+            dots: true,
+            smartSpeed: 600,
+            center: true,
+            slideBy: 1,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                576: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1,
+                }
+            },
         });
     }
 
 
-})();
+
+    // home page code ends here
+    // ================================++++++++++++++++++++====================
+})
